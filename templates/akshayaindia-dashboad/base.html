@@ -1,0 +1,139 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Akshaya India Dashboard</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{% static 'Dashboard/node_modules/mdi/css/materialdesignicons.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'Dashboard/node_modules/simple-line-icons/css/simple-line-icons.css' %}" />
+    <link rel="stylesheet" href="{% static 'Dashboard/node_modules/flag-icon-css/css/flag-icon.min.css' %}" />
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" href="{% static 'Dashboard/node_modules/chartist/dist/chartist.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'Dashboard/node_modules/jvectormap/jquery-jvectormap.css' %}" />
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{% static 'Dashboard/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'Dashboard/css/customHomeStyle.css' %}" />
+    <link rel="stylesheet" href="{% static 'Dashboard/css/customcmsIndiaStyle.css' %}" />
+    <!-- endinject -->
+    <link rel="icon" href="{% static 'Website/images/favicon.png' %}" type="image/png" sizes="16x16">
+    <!--  <script>
+        function changeColor(this) {
+          console.log(this.options[this.selectedIndex].value);
+        }
+      </script> -->
+    <style type="text/css">
+    .select-drop {
+        width: 100px;
+        display: inline-block;
+        padding: 2px 0;
+        border-radius: 2px;
+        color: white !important;
+        margin-right: 10px;
+    }
+
+    .select-drop select {
+        border: none;
+        width: 100px;
+        color: white !important;
+        -moz-appearance: none;
+        appearance: none;
+        -webkit-appearance: none;
+        display: inline-block;
+        height: 30px;
+        padding-left: 5px;
+    }
+
+    .select-drop select:focus {
+        border: none;
+        background: inherit;
+    }
+
+    .select-drop select option {
+        background: #fff !important;
+        padding-left: 10px;
+        color: #000;
+        width: 100px !important;
+    }
+
+    .errorlist {
+        color: red;
+        text-decoration: none;
+    }
+    .move_up {
+        background: none;
+        border: none;
+    }
+    .move_down {
+        background: none;
+        border: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+        {% include "akshayaindia-dashboad/include/nav.html" %}
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <div class="row row-offcanvas row-offcanvas-right">
+                <!-- partial:partials/_sidebar.html -->
+                {% include "akshayaindia-dashboad/include/header.html" %}
+                <!-- partial -->
+                {% block content %}
+                {% endblock content %}
+            </div>
+            <!-- row-offcanvas ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <div id="logoutModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <center>
+                        <img src="{% static 'Dashboard/images/caution.png' %}" class="modal-img" alt="" />
+                        <p class="modal-bold">Do you want to logout?</p>
+                        <p>You'll be logged out of your profile.</p>
+                        <div class="modal-btns">
+                            <a href="{% url 'Dashboard:logout' %}" class="btn btn-secondary btn-fw">Logout</a>
+                            <button type="button" class="btn btn-danger btn-fw" data-toggle="modal" data-target="#logoutModal">
+                                Cancel
+                            </button>
+                        </div>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="{% static 'Dashboard/node_modules/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'Dashboard/node_modules/popper.js/dist/umd/popper.min.js' %}"></script>
+    <script src="{% static 'Dashboard/node_modules/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
+    <script src="{% static 'Dashboard/node_modules/flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'Dashboard/node_modules/flot/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'Dashboard/node_modules/flot.curvedlines/curvedLines.js' %}"></script>
+    <script src="{% static 'Dashboard/node_modules/flot/jquery.flot.pie.js' %}"></script>
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+    <script src="{% static 'Dashboard/js/off-canvas.js' %}"></script>
+    <script src="{% static 'Dashboard/js/misc.js' %}"></script>
+    <script src="{% static 'Dashboard/js/file-upload.js' %}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="{% static 'Dashboard/js/dashboard.js' %}"></script>
+    <!-- <script src="{% static 'Dashboard/js/float-chart.js' %}"></script> -->
+    <!-- End custom js for this page-->
+</body>
+
+</html>

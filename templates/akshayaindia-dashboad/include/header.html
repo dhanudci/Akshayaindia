@@ -1,0 +1,119 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav" id="coll-2">
+        <li class="nav-item xnav-category">
+            <a class="nav-link" href="{% url 'Dashboard:home' %}">
+                <span class="menu-title">Home</span>
+            </a>
+        </li>
+        <li class="nav-item nav-category">
+            <a class="nav-link nav-collapse" data-toggle="collapse" data-target="#main-collapse-1" data-parent="#coll-2" aria-expanded="true" aria-controls="ui-basic">
+                <span>CMS</span>
+            </a>
+        </li>
+        <div class="collapse show" id="main-collapse-1">
+            <li class="nav-item" id="colap-1">
+                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#collapse-1" data-parent="#colap-1" aria-controls="ui-basic">
+                    <span class="menu-title">Vacations</span>
+                </a>
+                <div class="collapse" id="collapse-1">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'Dashboard:india' %}">India</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'Dashboard:international' %}">International</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'Dashboard:cruise' %}">Cruise</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Dashboard:corporate' %}">
+                    <span class="menu-title">Corporates</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Dashboard:visa_list' %}">
+                    <span class="menu-title">Visa</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Dashboard:blog_list' %}">
+                    <span class="menu-title">Blog</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Dashboard:testimonial_list' %}">
+                    <span class="menu-title">Testimonial</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Dashboard:faq_list' %}">
+                    <span class="menu-title">FAQs</span>
+                </a>
+            </li>
+        </div>
+        <li class="nav-item nav-category">
+            <a class="nav-link nav-collapse" data-toggle="collapse" data-target="#main-collapse-2" data-parent="#coll-2" aria-expanded="true" aria-controls="ui-basic">
+                <span>Inquiries</span>
+            </a>
+        </li>
+        <div class="collapse show" id="main-collapse-2">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic" data-target="#collapse-2" aria-expanded="false" aria-controls="ui-basic">
+                    <span class="menu-title">Vacations</span>
+                </a>
+                <div class="collapse" id="collapse-2">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'Dashboard:india_inquiry_list' %}">India</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'Dashboard:international_inquiry_list' %}">International</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'Dashboard:cruise_inquiry_list' %}">Cruise</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Dashboard:flight_inquiry_list' %}">
+                    <span class="menu-title">Flights</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Dashboard:hotel_inquiry_list' %}">
+                    <span class="menu-title">Hotels</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Dashboard:car_inquiry_list' %}">
+                    <span class="menu-title">Cars</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Dashboard:corporate_inquiry_list' %}">
+                    <span class="menu-title">Corporates</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Dashboard:visa_inquiry_list' %}">
+                    <span class="menu-title">Visa</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Dashboard:faqs_inquiry_list' %}">
+                    <span class="menu-title">FAQs</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Dashboard:contact_inquiry_list' %}">
+                    <span class="menu-title">Contact Us</span>
+                </a>
+            </li>
+        </div>
+    </ul>
+</nav>

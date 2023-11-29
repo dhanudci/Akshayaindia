@@ -1,0 +1,91 @@
+{% extends 'akshayaindia-dashboad/base.html' %}
+{% load staticfiles %}
+{% block content %}
+<!-- partial -->
+<div class="content-wrapper">
+    <h2 class="card-title" style="padding-bottom: 0; padding-left:15px">
+        Inquiries this month
+    </h2>
+    <div class="row section social-section">
+        <div class="col-lg-4 grid-margin stretch-card">
+            <div class="social-card w-100 bg-facebook" style="background: #3B579D">
+                <div class="social-icon">
+                    <img src="{% static 'Dashboard/images/airplane.png' %}" alt="" />
+                </div>
+                <div class="content">
+                    <p>{{ vacations.count }}</p>
+                    <p>Total inquiries</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 grid-margin stretch-card">
+            <div class="social-card w-100 bg-twitter" style="background: #DD2A7B">
+                <div class="social-icon">
+                    <img src="{% static 'Dashboard/images/briefcase.png' %}" alt="" />
+                </div>
+                <div class="content">
+                    <p>{{ corporates.count }}</p>
+                    <p>Corporate inquiries</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 grid-margin stretch-card">
+            <div class="social-card w-100 bg-dribbble" style="background: #0077B5">
+                <div class="social-icon">
+                    <img src="{% static 'Dashboard/images/passport.png' %}" alt="" />
+                </div>
+                <div class="content">
+                    <p>{{ visas.count }}</p>
+                    <p>Visa inquiries</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ROW ENDS -->
+    <div class="row">
+        <div class="col-lg-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Inquiry Grid</h2>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="float-chart-container">
+                                <div id="pie-chart" class="float-chart"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 pie-list-div">
+                            <div class="col-lg-12 pie-list">
+                                <div class="row pie-list-item">
+                                    <div class="col-lg-1">
+                                        <div class="square" id="home-pie-square-1"></div>
+                                    </div>
+                                    <div class="col-lg-10 pie-list-text">
+                                        Resolved (<span id="resolved_percentage">{{ resolved_percentage }}</span> %)
+                                    </div>
+                                </div>
+                                <div class="row pie-list-item">
+                                    <div class="col-lg-1">
+                                        <div class="square" id="home-pie-square-2"></div>
+                                    </div>
+                                    <div class="col-lg-10 pie-list-text">
+                                        Process (<span id="process_percentage">{{ process_percentage }}</span> %)
+                                    </div>
+                                </div>
+                                <div class="row pie-list-item">
+                                    <div class="col-lg-1">
+                                        <div class="square" id="home-pie-square-3"></div>
+                                    </div>
+                                    <div class="col-lg-10 pie-list-text">
+                                        Pending (<span id="pending_percentage">{{ pending_percentage }}</span> %)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ROW ENDS -->
+</div>
+{% endblock content %}

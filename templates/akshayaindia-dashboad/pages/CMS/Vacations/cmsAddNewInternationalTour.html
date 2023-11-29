@@ -1,0 +1,916 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Akshaya India Dashboard</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{% static 'Dashboard/node_modules/mdi/css/materialdesignicons.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'Dashboard/node_modules/simple-line-icons/css/simple-line-icons.css' %}" />
+    <link rel="stylesheet" href="{% static 'Dashboard/node_modules/flag-icon-css/css/flag-icon.min.css' %}" />
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" href="{% static 'Dashboard/node_modules/chartist/dist/chartist.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'Dashboard/node_modules/jvectormap/jquery-jvectormap.css' %}" />
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{% static 'Dashboard/node_modules/dropify/dist/css/dropify.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Dashboard/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'Dashboard/css/cmsAddNewTourStyle.css' %}" />
+    <!-- endinject -->
+    <link rel="icon" href="{% static 'Website/images/favicon.png' %}" type="image/png" sizes="16x16">
+    <link href="{% static 'Dashboard/css/cropper.min.css' %}" rel="stylesheet">
+    <style type="text/css">
+    .errorlist {
+        color: red;
+        text-decoration: none;
+    }
+
+    .button-banner-image,
+    .button-card-image,
+    .button-poster-image {
+        width: 215px;
+    }
+
+    .button-banner-image input[type=file] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+
+    .button-card-image input[type=file] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+
+    .button-poster-image input[type=file] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+
+    .checkbox-multiple {
+        margin-top: 10px;
+        margin-left: -13px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+        {% include "akshayaindia-dashboad/include/nav.html" %}
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <div class="row row-offcanvas row-offcanvas-right">
+                <!-- partial:partials/_sidebar.html -->
+                {% include "akshayaindia-dashboad/include/header.html" %}
+                <!-- partial -->
+                <div class="content-wrapper">
+                    <h2 class="card-title" style="padding-bottom: 0; padding-left:15px">
+                        CMS
+                        <img src="{% static 'Dashboard/images/down-arrow@2x.png' %}" style="width: 11.2px" />
+                        Vacation
+                        <img src="{% static 'Dashboard/images/down-arrow@2x.png' %}" style="width: 11.2px" />
+                        International
+                        <img src="{% static 'Dashboard/images/down-arrow@2x.png' %}" style="width: 11.2px" />
+                        Add New Tour
+                    </h2>
+                    <div class="row">
+                        <div class="col-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Add New Tour</h4>
+                                    <form class="form-sample repeater" method="post" enctype='multipart/form-data'>
+                                        {% csrf_token %}
+                                        {{ form.x }}
+                                        {{ form.y }}
+                                        {{ form.width }}
+                                        {{ form.height }}
+                                        {{ form.x1 }}
+                                        {{ form.y1 }}
+                                        {{ form.width1 }}
+                                        {{ form.height1 }}
+                                        {{ form.x2 }}
+                                        {{ form.y2 }}
+                                        {{ form.width2 }}
+                                        {{ form.height2 }}
+                                        {{ form.media }}
+                                        <div class="row main-form-row">
+                                            <div class="col-md-12">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label bold-label">General Details</label>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Tour Name<span class="asterisk"> *</span></label>
+                                                    <div class="col-sm-10">
+                                                        {{ form.title }}
+                                                        {{ form.title.errors }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group  row">
+                                                    <label class="col-sm-2 col-form-label">Category<span class="asterisk"> *</span></label>
+                                                    <div class="form-group col-sm-4 checkbox-multiple">
+                                                        {{ form.category }}
+                                                        {{ form.category.errors }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Duration</label>
+                                                    <label class="col-sm-2 col-form-label">Days<span class="asterisk"> *</span></label>
+                                                    <label class="col-sm-2 col-form-label">Nights<span class="asterisk"> *</span></label>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="form-group col-sm-2 offset-sm-2">
+                                                        {{ form.day_in_tour }}
+                                                        {{ form.day_in_tour.errors }}
+                                                    </div>
+                                                    <div class="form-group col-sm-2 ">
+                                                        {{ form.night_in_tour }}
+                                                        {{ form.night_in_tour.errors }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Price</label>
+                                                    <label class="col-sm-2 col-form-label">Price</label>
+                                                    <label class="col-sm-2 col-form-label">Striked-out Price</label>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="form-group col-sm-2 offset-sm-2">
+                                                        {{ form.tour_discounted_price }}
+                                                    </div>
+                                                    <div class="form-group col-sm-2 ">
+                                                        {{ form.tour_price }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-check form-check-flat">
+                                                            <label class="form-check-label">
+                                                                {{ form.hero_tour }}
+                                                                &nbsp;&nbsp; Show as Hero Banner on Homepage<i class="input-helper"></i>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="form-check form-check-flat">
+                                                            <label class="form-check-label">
+                                                                {{ form.home_visible }}Show on Homepage<i class="input-helper"></i></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Display Image<span class="asterisk"> *</span></label>
+                                                    <div class="form-group col-sm-2">
+                                                        <div class="btn btn-info button-card-image">
+                                                            {{ form.card_image }}Upload Image (Max Size: 10 MB)
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-sm-7 ml-auto">
+                                                        <div class="card-file-upload-info ml-3 mt-1">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Banner Image<span class="asterisk"> *</span></label>
+                                                    <div class="form-group col-sm-2">
+                                                        <div class="btn btn-info button-banner-image">
+                                                            {{ form.banner_image }}Upload Image (Max Size: 10 MB)
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-sm-7 ml-auto">
+                                                        <div class="banner-file-upload-info ml-3 mt-1">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Poster Image</label>
+                                                    <div class="form-group col-sm-2">
+                                                        <div class="btn btn-info button-poster-image">
+                                                            {{ form.poster_image }}Upload Image (Max Size: 10 MB)
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-sm-7 ml-auto">
+                                                        <div class="poster-file-upload-info ml-3 mt-1">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Label</label>
+                                                    <div class="col-sm-2 form-group lable-list-div">
+                                                        <ul class="label-list">
+                                                            <li class="item">
+                                                                {{form.vacation_label}}
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label bold-label">Tour Details</label>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Overview<span class="asterisk"> *</span></label>
+                                                    <div class="form-group col-sm-10">
+                                                        {{ form.overview_content }}
+                                                        {{ form.overview_content.errors }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="form-group col-sm-2 col-form-label">Itineary</label>
+                                                </div>
+                                                {{ formset1.management_form }}
+                                                {% for form_data in formset1 %}
+                                                <div data-repeater-list="group-a" class="form-group row itineary-row item1">
+                                                    <div data-repeater-item class="col-md-12">
+                                                        <div class="form-group row">
+                                                            <label class="form-group col-sm-2 col-form-label">Heading</label>
+                                                            <div class="form-group col-sm-10">
+                                                                {{ form_data.heading }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="form-group col-sm-10 offset-sm-2">
+                                                                {{ form_data.description }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-md-2">
+                                                                <a class="remove remove-form-row1" id="{{ formset1.prefix }}" style="color: red">Remove</a>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <div class="check-div">
+                                                                    <label class="container">Breakfast
+                                                                        {{ form_data.breakfast }}
+                                                                        <span class="checkmark"></span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <div class="check-div">
+                                                                    <label class="container">Lunch
+                                                                        {{ form_data.lunch }}
+                                                                        <span class="checkmark"></span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <div class="check-div">
+                                                                    <label class="container">Dinner
+                                                                        {{ form_data.dinner }}
+                                                                        <span class="checkmark"></span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <div class="check-div">
+                                                                    <label class="container">Stay in Hotel
+                                                                        {{ form_data.stay_in_hotel }}
+                                                                        <span class="checkmark"></span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                                <div class="form-group row">
+                                                    <a href="#" class="form-group add-form-row1 col-sm-4" id="{{ formset1.prefix }}">+ Add more Itinerary</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Experience<span class="asterisk"> *</span></label>
+                                                    <div class="form-group col-sm-10">
+                                                        {{ form.experience_content }}
+                                                        {{ form.experience_content.errors }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Information<span class="asterisk"> *</span></label>
+                                                    <div class="form-group col-sm-10">
+                                                        {{ form.information_content }}
+                                                        {{ form.information_content.errors }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Meta Title</label>
+                                                    <div class="form-group col-sm-10">
+                                                        {{ form.meta_title }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Meta Keywords</label>
+                                                    <div class="form-group col-sm-10">
+                                                        {{ form.meta_keywords }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Meta Description</label>
+                                                    <div class="form-group col-sm-10">
+                                                        {{ form.meta_description }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div data-repeater-item class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Gallery</label>
+                                        </div>
+                                        {{ formset2.management_form }}
+                                        {% for form_data in formset2 %}
+                                        <div data-repeater-item class="form-group row item2">
+                                            <div class="form-group col-sm-5">
+                                                <div class="hide-heading-image">
+                                                    {{ form_data.gallary_image }}
+                                                </div>
+                                                <div class="input-group col-xs-12">
+                                                    {%if form_data.gallary_image.value == None %}
+                                                    <input type="text" class="form-control file-upload-info display-heading-image" disabled placeholder="Upload Square Image" id='id_vacation2-{{forloop.counter0}}' />
+                                                    {%else%}
+                                                    <input type="text" class="form-control file-upload-info display-heading-image" disabled placeholder="Upload Square Image" value="{{form_data.gallary_image.value}}" id='id_vacation2-{{forloop.counter0}}' />
+                                                    {%endif%}
+                                                    <span class="input-group-append">
+                                                        <button class="file-upload-browse btn btn-info" type="button">
+                                                            Upload Image (Max 5 MB)
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group row">
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="button-div offset-sm-2">
+                                                        <button type="submit" class="btn btn-success btn-fw">
+                                                            Save
+                                                        </button>
+                                                        <a href="{% url 'Dashboard:international' %}" class="btn btn-secondary btn-fw">Cancel</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                <!-- <footer class="footer">
+          <div class="container-fluid clearfix">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2018 <a href="http://www.bootstrapdash.com/" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
+          </div>
+        </footer> -->
+                <!-- partial -->
+            </div>
+            <!-- row-offcanvas ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <div id="logoutModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <center>
+                        <img src="{% static 'Dashboard/images/caution.png' %}" class="modal-img" alt="" />
+                        <p class="modal-bold">Do you want to logout?</p>
+                        <p>You'll be logged out of your profile.</p>
+                        <div class="modal-btns">
+                            <a href="{% url 'Dashboard:logout' %}" class="btn btn-secondary btn-fw">Logout</a>
+                            <button type="button" class="btn btn-danger btn-fw" data-toggle="modal" data-target="#logoutModal">
+                                Cancel
+                            </button>
+                        </div>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalCrop">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="" id="image" style="max-width: 100%;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary js-crop-and-upload" data-dismiss="modal">Select</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalCrop1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="" id="image1" style="max-width: 100%;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary js-crop-and-upload1" data-dismiss="modal">Select</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalCrop2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="" id="image2" style="max-width: 100%;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-primary js-crop-and-upload2">Select</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="{% static 'Dashboard/node_modules/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'Dashboard/node_modules/popper.js/dist/umd/popper.min.js' %}"></script>
+    <script src="{% static 'Dashboard/node_modules/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'Dashboard/node_modules/dropify/dist/js/dropify.min.js' %}"></script>
+    <!-- <script src="{% static 'Dashboard/node_modules/jquery.repeater/jquery.repeater.min.js' %}"></script> -->
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+    <script src="{% static 'Dashboard/js/off-canvas.js' %}"></script>
+    <script src="{% static 'Dashboard/js/misc.js' %}"></script>
+    <script src="{% static 'Dashboard/js/file-upload.js' %}"></script>
+    <script src="{% static 'Dashboard/js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'Dashboard/js/dropify.js' %}"></script>
+    <!-- <script src="{% static 'Dashboard/js/form-repeater.js' %}"></script> -->
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!-- <script src="../../js/float-chart.js"></script> -->
+    <!-- End custom js for this page-->
+    <script src="{% static 'Dashboard/js/cropper.min.js' %}"></script>
+    <script>
+    $(function() {
+        /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+        $("#card_image").change(function(e) {
+            if (this.files && this.files[0]) {
+                /* here we are checking the file size should not be grater then 20mb  */
+                if (Math.round(this.files[0].size) / 1024 > 15000) {
+                    alert("Please select image less then 15 MB.");
+                    $('.card-file-upload-info').text(" ");
+                    $(this).val('');
+                } else {
+                    var reader = new FileReader();
+                    $('.card-file-upload-info').text(e.target.files[0].name)
+                    reader.onload = function(e) {
+                        $("#image").attr("src", e.target.result);
+                        // $("#modalCrop").modal("show");
+                        $('#modalCrop').modal({
+                            backdrop: 'static',
+                            keyboard: false
+                        });
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            }
+        });
+
+        /* SCRIPTS TO HANDLE THE CROPPER BOX */
+        var $image = $("#image");
+        var cropBoxData;
+        var canvasData;
+        $("#modalCrop").on("shown.bs.modal", function() {
+            $image.cropper({
+                viewMode: 1,
+                aspectRatio: 1 / 1,
+                minCropBoxWidth: 4,
+                minCropBoxHeight: 4,
+                ready: function() {
+                    $image.cropper("setCanvasData", canvasData);
+                    $image.cropper("setCropBoxData", cropBoxData);
+                }
+            });
+        }).on("hidden.bs.modal", function() {
+            cropBoxData = $image.cropper("getCropBoxData");
+            canvasData = $image.cropper("getCanvasData");
+            $image.cropper("destroy");
+        });
+
+        $(".js-zoom-in").click(function() {
+            $image.cropper("zoom", 0.1);
+        });
+
+        $(".js-zoom-out").click(function() {
+            $image.cropper("zoom", -0.1);
+        });
+
+        /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+        $(".js-crop-and-upload").click(function() {
+            var cropData = $image.cropper("getData");
+            $("#id_x").val(cropData["x"]);
+            $("#id_y").val(cropData["y"]);
+            $("#id_height").val(cropData["height"]);
+            $("#id_width").val(cropData["width"]);
+            // $("#formUpload").submit();
+            console.log(cropData["x"]);
+        });
+
+
+
+    });
+    </script>
+    <script>
+    $(function() {
+
+        /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+        $("#banner_image").change(function(e) {
+            if (this.files && this.files[0]) {
+                /* here we are checking the file size should not be grater then 20mb  */
+                if (Math.round(this.files[0].size) / 1024 > 15000) {
+                    alert("Please select image less then 15 MB.");
+                    $('.banner-file-upload-info').text(" ");
+                    $(this).val('');
+                } else {
+                    var reader = new FileReader();
+                    $('.banner-file-upload-info').text(e.target.files[0].name)
+                    reader.onload = function(e) {
+                        $("#image1").attr("src", e.target.result);
+                        // $("#modalCrop").modal("show");
+                        $('#modalCrop1').modal({
+                            backdrop: 'static',
+                            keyboard: false
+                        });
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            }
+        });
+
+        /* SCRIPTS TO HANDLE THE CROPPER BOX */
+        var $image = $("#image1");
+        var cropBoxData;
+        var canvasData;
+        $("#modalCrop1").on("shown.bs.modal", function() {
+            $image.cropper({
+                viewMode: 1,
+                aspectRatio: 3.43 / 1,
+                minCropBoxWidth: 3.43,
+                minCropBoxHeight: 1,
+                ready: function() {
+                    $image.cropper("setCanvasData", canvasData);
+                    $image.cropper("setCropBoxData", cropBoxData);
+                }
+            });
+        }).on("hidden.bs.modal", function() {
+            cropBoxData = $image.cropper("getCropBoxData");
+            canvasData = $image.cropper("getCanvasData");
+            $image.cropper("destroy");
+        });
+
+        $(".js-zoom-in").click(function() {
+            $image.cropper("zoom", 0.1);
+        });
+
+        $(".js-zoom-out").click(function() {
+            $image.cropper("zoom", -0.1);
+        });
+
+        /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+        $(".js-crop-and-upload1").click(function() {
+            var cropData = $image.cropper("getData");
+            $("#id_x1").val(cropData["x"]);
+            $("#id_y1").val(cropData["y"]);
+            $("#id_height1").val(cropData["height"]);
+            $("#id_width1").val(cropData["width"]);
+            // $("#formUpload").submit();
+            console.log(cropData["x"]);
+        });
+    });
+    </script>
+    <script>
+    $(function() {
+        /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+        $("#poster_image").change(function(e) {
+            if (this.files && this.files[0]) {
+                /* here we are checking the file size should not be grater then 20mb  */
+                if (Math.round(this.files[0].size) / 1024 > 15000) {
+                    alert("Please select image less then 15 MB.");
+                    $('.poster-file-upload-info').text(" ");
+                    $(this).val('');
+                } else {
+                    var reader = new FileReader();
+                    $('.poster-file-upload-info').text(e.target.files[0].name)
+                    reader.onload = function(e) {
+                        $("#image2").attr("src", e.target.result);
+                        // $("#modalCrop").modal("show");
+                        $('#modalCrop2').modal({
+                            backdrop: 'static',
+                            keyboard: false
+                        });
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            }
+        });
+
+        /* SCRIPTS TO HANDLE THE CROPPER BOX */
+        var $image = $("#image2");
+        var cropBoxData;
+        var canvasData;
+        $("#modalCrop2").on("shown.bs.modal", function() {
+            $image.cropper({
+                viewMode: 1,
+                aspectRatio: 3.43 / 1,
+                minCropBoxWidth: 3.43,
+                minCropBoxHeight: 1,
+                ready: function() {
+                    $image.cropper("setCanvasData", canvasData);
+                    $image.cropper("setCropBoxData", cropBoxData);
+                }
+            });
+        }).on("hidden.bs.modal", function() {
+            cropBoxData = $image.cropper("getCropBoxData");
+            canvasData = $image.cropper("getCanvasData");
+            $image.cropper("destroy");
+        });
+
+        $(".js-zoom-in").click(function() {
+            $image.cropper("zoom", 0.1);
+        });
+
+        $(".js-zoom-out").click(function() {
+            $image.cropper("zoom", -0.1);
+        });
+
+        /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+        $(".js-crop-and-upload2").click(function() {
+            var cropData = $image.cropper("getData");
+            $("#id_x2").val(cropData["x"]);
+            $("#id_y2").val(cropData["y"]);
+            $("#id_height2").val(cropData["height"]);
+            $("#id_width2").val(cropData["width"]);
+            // $("#formUpload").submit();
+            console.log(cropData["x"]);
+        });
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        function updateElementIndex(el, prefix, ndx) {
+            var id_regex = new RegExp('(' + prefix + '-\\d+-)');
+            var replacement = prefix + '-' + ndx + '-';
+            if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex,
+                replacement));
+            if (el.id) el.id = el.id.replace(id_regex, replacement);
+            if (el.name) el.name = el.name.replace(id_regex, replacement);
+        }
+
+        function addForm(btn, prefix) {
+            var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+            console.log(formCount);
+            if (formCount < 1000) {
+                // Clone a form (without event handlers) from the first form
+                var row = $(".item1:last").clone(false).get(0);
+                console.log(row);
+
+                // Insert it after the last form
+                $(row).removeAttr('id').show().insertAfter(".item1:last");
+
+                // Remove the bits we don't want in the new row/form
+                // e.g. error messages
+                $(".errorlist", row).remove();
+                $(row).children().removeClass("error");
+
+                // Relabel or rename all the relevant bits
+                $(row).find('.formset-field').each(function() {
+                    updateElementIndex(this, prefix, formCount);
+                    $(this).val('');
+                    $(this).removeAttr('value');
+                    $(this).prop('checked', false);
+                });
+
+                // Add an event handler for the delete item/form link
+                $(row).find(".delete").click(function() {
+                    return deleteForm(this, prefix);
+                });
+                // Update the total form count
+                $("#id_" + prefix + "-TOTAL_FORMS").val(formCount + 1);
+
+            } // End if
+
+            return false;
+        }
+
+
+        function deleteForm(btn, prefix) {
+            var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+            if (formCount > 1) {
+                // Delete the item/form
+                var goto_id = $(btn).find('input').val();
+                if (goto_id) {
+                    $.ajax({
+                        url: "/" + window.location.pathname.split("/")[1] + "/formset-data-delete/" + goto_id + "/?next=" + window.location.pathname,
+                        error: function() {
+                            console.log("error");
+                        },
+                        success: function(data) {
+                            $(btn).parents('.item1').remove();
+                        },
+                        type: 'GET'
+                    });
+                } else {
+                    $(btn).parents('.item1').remove();
+                }
+
+                var forms = $('.item1'); // Get all the forms
+                // Update the total number of forms (1 less than before)
+                $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+                var i = 0;
+                // Go through the forms and set their indices, names and IDs
+                for (formCount = forms.length; i < formCount; i++) {
+                    $(forms.get(i)).find('.formset-field').each(function() {
+                        updateElementIndex(this, prefix, i);
+                    });
+                }
+            } // End if
+
+            return false;
+        }
+
+        $("body").on('click', '.remove-form-row1', function() {
+            deleteForm($(this), String($('.add-form-row1').attr('id')));
+        });
+
+        $("body").on('click', '.add-form-row1', function() {
+            return addForm($(this), String($(this).attr('id')));
+        });
+
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        function updateElementIndex(el, prefix, ndx) {
+            var id_regex = new RegExp('(' + prefix + '-\\d+-)');
+            var replacement = prefix + '-' + ndx + '-';
+            if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex,
+                replacement));
+            if (el.id) el.id = el.id.replace(id_regex, replacement);
+            if (el.name) el.name = el.name.replace(id_regex, replacement);
+        }
+
+        function addForm(btn, prefix) {
+            var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+            console.log(formCount);
+            if (formCount < 1000) {
+                // Clone a form (without event handlers) from the first form
+                var row = $(".item2:last").clone(false).get(0);
+                console.log(row);
+
+                // Insert it after the last form
+                $(row).removeAttr('id').show().insertAfter(".item2:last");
+
+                // Remove the bits we don't want in the new row/form
+                // e.g. error messages
+                $(".errorlist", row).remove();
+                $(row).children().removeClass("error");
+
+                // Relabel or rename all the relevant bits
+                $(row).find('.formset-field').each(function() {
+                    updateElementIndex(this, prefix, formCount);
+                    $(this).val('');
+                    $(this).removeAttr('value');
+                    $(this).prop('checked', false);
+                });
+
+                // Add an event handler for the delete item/form link
+                $(row).find(".delete").click(function() {
+                    return deleteForm(this, prefix);
+                });
+                // Update the total form count
+                $("#id_" + prefix + "-TOTAL_FORMS").val(formCount + 1);
+
+            } // End if
+
+            return false;
+        }
+
+
+        function deleteForm(btn, prefix) {
+            var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+            if (formCount > 1) {
+                // Delete the item/form
+                var goto_id = $(btn).find('input').val();
+                if (goto_id) {
+                    $.ajax({
+                        url: "/" + window.location.pathname.split("/")[1] + "/formset-data-delete/" + goto_id + "/?next=" + window.location.pathname,
+                        error: function() {
+                            console.log("error");
+                        },
+                        success: function(data) {
+                            $(btn).parents('.item2').remove();
+                        },
+                        type: 'GET'
+                    });
+                } else {
+                    $(btn).parents('.item2').remove();
+                }
+
+                var forms = $('.item2'); // Get all the forms
+                // Update the total number of forms (1 less than before)
+                $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+                var i = 0;
+                // Go through the forms and set their indices, names and IDs
+                for (formCount = forms.length; i < formCount; i++) {
+                    $(forms.get(i)).find('.formset-field').each(function() {
+                        updateElementIndex(this, prefix, i);
+                    });
+                }
+            } // End if
+
+            return false;
+        }
+
+        $("body").on('click', '.remove-form-row2', function() {
+            deleteForm($(this), String($('.add-form-row2').attr('id')));
+        });
+
+        $("body").on('click', '.add-form-row2', function() {
+            return addForm($(this), String($(this).attr('id')));
+        });
+
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        for (var id = 0; id < 8; id++) {
+            $('#id_vacation2-' + id + '-gallary_image').addClass("file-upload-default");
+            $('.hide-heading-image').css("display", "none");
+        }
+
+        $('.hide-heading-image input[type="file"]').change(function(e) {
+            var fileName = e.target.files[0].name;
+            id = this.id.replace('-gallary_image', '');
+            $('#' + id).val(fileName);
+        });
+        // $('input').addClass("form-control");
+
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#id_vacation_label").addClass("form-control");
+    });
+    </script>
+</body>
+
+</html>

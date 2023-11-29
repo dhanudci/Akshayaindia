@@ -1,0 +1,108 @@
+{% extends 'akshayaindia-dashboad/base.html' %}
+{% load staticfiles %}
+{% block content %}
+<!-- partial -->
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">FAQs</h4>
+                    <a href="{% url 'Dashboard:faq_add' %}" class="add-tour">+ Add New Question</a>
+                    <table class="table table-striped table-bottom faq-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span style="margin-right: 5%;">Sr. No.</span>Question
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for obj in faq_list %}
+                            <tr>
+                                <td class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            {{ forloop.counter0|add:faq_list.start_index }} 
+                                        </div>
+                                        <div class="col-md-9 question">
+                                            {{ obj.question }}
+                                        </div>
+                                        <div class="col-md-1">
+                                            <a href="{% url 'Dashboard:faq_edit' obj.id %}" class="edit">Edit</a>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <a href="#" class="delete" data-toggle="modal" data-target="#DeleteModal{{ obj.id }}">Delete</a>
+                                            <div id="DeleteModal{{ obj.id}}" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <center>
+                                                                <img src="{% static 'Dashboard/images/caution.png' %}" class="modal-img" alt="" />
+                                                                <p class="modal-bold">Do you want to Delete?</p>
+                                                                <p>You can't revert back changes. Are you sure?</p>
+                                                                <div class="modal-btns">
+                                                                    <button type="button" class="btn btn-secondary btn-fw" data-dismiss="modal">
+                                                                        Cancel
+                                                                    </button>
+                                                                    <a href="{% url 'Dashboard:faq_delete' obj.id %}" class="btn btn-danger btn-fw">Delete</a>
+                                                                </div>
+                                                            </center>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row answer">
+                                        <div class="col-md-1">
+                                            
+                                        </div>
+                                        <div class="col-md-11">
+                                            {{ obj.answere}}
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="d-flex align-items-center justify-content-between flex-wrap">
+                        <p class="mb-0">
+                            <!-- Showing 1 to 6 of 34 entries -->
+                        </p>
+                        {% if faq_list.has_other_pages %}
+                        <nav>
+                            <ul class="pagination rounded-separated pagination-info mt-3">
+                                {% if faq_list.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ faq_list.previous_page_number }}"><i class="mdi mdi-chevron-left"></i></a>
+                                </li>
+                                {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#"><i class="mdi mdi-chevron-left"></i></a>
+                                </li>
+                                {% endif %}
+                                {% for i in faq_list.paginator.page_range %}
+                                {% if faq_list.number == i %}
+                                <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                                {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                                {% endfor %}
+                                {% if faq_list.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ faq_list.next_page_number }}"><i class="mdi mdi-chevron-right"></i></a></li>
+                                {% else %}
+                                <li class="page-item disabled"><a class="page-link" href="#"><i class="mdi mdi-chevron-right"></i></a></li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
